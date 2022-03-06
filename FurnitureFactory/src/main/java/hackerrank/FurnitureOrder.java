@@ -6,40 +6,72 @@ public class FurnitureOrder implements FurnitureOrderInterface {
     /**
      * TODO: Create a map of Furniture items to order quantities
      */
-
+private final HashMap<Furniture, Integer> furnitures;
     /**
      * Initialize a new mapping of Furniture types to order quantities.
      */
     FurnitureOrder() {
         // TODO: Complete the constructor
+        furnitures = new HashMap<Furniture, Integer>();
     }
 
     public void addToOrder(final Furniture type, final int furnitureCount) {
         // TODO: Complete the method
+        Integer count = 0;
+        if(furnitures.containsKey(type))
+        {
+            count = furniture.get(type);
+        }
+        furniture.put(type, count + furnitureCount);
     }
 
     public HashMap<Furniture, Integer> getOrderedFurniture() {
         // TODO: Complete the method
-        return null;
+        return new HashMap<Furniture, Integer > (furnitures);
+        //return null;
     }
 
     public float getTotalOrderCost() {
         // TODO: Complete the method
-        return -1.0f;
+        if(!furnitures.isEmpty());
+        {
+            return furnitures.entrySet().stream()
+                .map(f -> f.getKey().cost() * f.gatvalue())
+                .collect(Collectors.toList())
+                .stream()
+                .reduce(Float::sum)
+                .get()
+        }
+        return 0.0f;
     }
 
     public int getTypeCount(Furniture type) {
         // TODO: Complete the method
-        return -1;
+        if(furnitures.containsKey(type))
+        {
+            return furnitures.get(type);
+        }    
+                
+        return 0;
     }
 
     public float getTypeCost(Furniture type) {
         // TODO: Complete the method
-        return -1.0f;
+        if(furnitures.containsKey(type))
+        {
+            return furniturs.get(type) * type.cost();
+        }
+        return 0.0f;
     }
 
     public int getTotalOrderQuantity() {
         // TODO: Complete the method
-        return -1;
+        if(!furnitures.isEmpty())
+        {
+            return furtnitures.values().stream()
+                .reduce(Interger::sum)
+                .get();
+        }
+        return 0;
     }
 }
